@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <title>Profile Page</title>
+    <title>Profile Page</title>
 </head>
 <body>
     <h1>Welcome <%= user.name %></h1>
+    <h1>your age is <%= user.age %></h1>
+    <ul>
+        <% user.skill.forEach((item)=> { %>
+            <li>
+                <%= item %>
+            </li>
+        <% }); %>
+    </ul>
 </body>
 </html>
