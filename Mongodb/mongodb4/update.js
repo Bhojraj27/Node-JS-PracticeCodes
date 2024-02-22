@@ -7,8 +7,8 @@ const updateData = async () => {
         const collection = await db.collection('products')
         // Update the data
         let result = await collection.updateOne(
-            { name: "note 9" },
-            { $set: { price: 39000 } }
+            { name: "note 9 " },
+            { $set: { name: "note 9 pro "  } }
         );
 
         console.log(result);
