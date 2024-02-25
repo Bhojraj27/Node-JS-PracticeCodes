@@ -7,7 +7,14 @@ const app=express();
 app.use(express.json());
 
 app.get('/search/:key',async(req, res)=> {
-    const data = await Product.find({ name: req.params.key });
+    const data = await Product.find(
+        {
+        "$or":[
+            {"name":{$regex:req.params.key}}
+            // {"brand":{$regex:req.params.key}}
+
+         ]
+     });
     console.log(data);
     res.send(data);
 })
