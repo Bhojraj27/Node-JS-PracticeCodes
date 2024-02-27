@@ -17,6 +17,32 @@ app.post('/users', (req, res) => {
         else { res.send(result); }
     });
 })
+
+app.put('/:id', (req, res) => {
+    const { name, pass, user_type, city } = req.body;
+    const id = req.params.id;
+    
+    // Check if all required fields are present
+    if (!name || !pass || !user_type || !city) {
+        return res.status(400).send("Missing required fields");
+    }
+
+    const sql = "UPDATE users SET name=?, pass=?, user_type=?, city=? WHERE id=?";
+    const values = [name, pass, user_type, city, id];
+
+    mysqlCon.query(sql, values, (err, result) => {
+        if (err) {
+            console.error("Error updating user:", err);
+            return res.status(500).send("Error updating user");
+        }
+        // Check if any rows were affected
+        if (result.affectedRows === 0) {
+            return res.status(404).send("User not found");
+        }
+        res.status(200).send("User updated successfully");
+    });
+});
+
 app.listen(3000);
 
 
